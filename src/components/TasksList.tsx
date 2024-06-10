@@ -1,25 +1,13 @@
+import { useSelector } from 'react-redux';
 import TaskItem from './TaskItem';
+import { StateType } from '../redux';
 
-type PropTypes = {
-  tasks: Task[];
-  toggleTask: (id: number) => void;
-  deleteTask: (id: number) => void;
-};
-
-export default function TasksList({
-  tasks,
-  toggleTask,
-  deleteTask,
-}: PropTypes) {
+export default function TasksList() {
+  const tasks = useSelector((state: StateType) => state.todo);
   return (
     <>
-      {tasks.map((t) => (
-        <TaskItem
-          task={t}
-          key={t.id}
-          toggleTask={toggleTask}
-          deleteTask={deleteTask}
-        />
+      {tasks.map((t: Task) => (
+        <TaskItem task={t} key={t.id} />
       ))}
     </>
   );

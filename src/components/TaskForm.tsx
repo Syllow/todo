@@ -1,16 +1,16 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../redux';
+import styled from 'styled-components';
 
-type PropTypes = {
-  addTask: (text: string) => void;
-};
-
-export default function TaskForm({ addTask }: PropTypes) {
+export default function TaskForm() {
   const [text, setText] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    addTask(text);
+    dispatch(addTask(text));
 
     setText('');
   };
